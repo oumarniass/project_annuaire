@@ -53,6 +53,9 @@ class Film
      */
     private $description;
 
+
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -142,4 +145,12 @@ class Film
 
         return $this;
     }
+
+
+
+
+
+
+
+
 }

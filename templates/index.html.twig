@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/colorbox.css" type="text/css" media="all">
     <script src="js/jquery-1.8.0.min.js"></script>
     <script src="js/jquery.colorbox-min.js"></script>
-    <!--[if lt IE 9]><script src="js/modernizr.custom.js"></script><![endif]-->
+    ><script src="js/modernizr.custom.js"></script><![endif]-->
     <script src="js/functions.js"></script>
     {% endblock %}
 </head>
@@ -27,7 +27,7 @@
                     <!-- navigation -->
                     <nav id="navigation">
                         <ul>
-                            <li><a href="{{ path('accueil') }}">Films</a></li>
+                            <li><a href="{{ path('liste_film') }}">Films</a></li>
                             <li><a href="{{ path('easyadmin') }}">Espace admin<span>20</span></a></li>
                         </ul>
                     </nav>
@@ -36,6 +36,7 @@
                 </div>
                 <!-- end of header -->
                 <!-- main -->
+                {% for film in films %}
                 <div class="main">
                     <!-- content -->
                     <section class="content">
@@ -44,45 +45,41 @@
                             <!-- post-inner -->
                             <div class="post-inner">
                                 <header>
-                                    <h2><a href="#">MovieTitle 1 Goes Here</a></h2>
+                                    <h2>{{ film.titre }}</h2>
                                     <p class="tags"><a href="#">FAMILY</a> <a href="#">COMEDY</a> <a href="#">ANIMATION</a>
                                     </p>
                                     <div class="cl">&nbsp;</div>
                                 </header>
-                                <div class="img-holder"> <a href="#"><img src="css/images/post-img.jpg" alt=""></a> <a
-                                        href="css/images/post-img.jpg" class="btn-full-image popup"><span>FULL IMAGE</span></a>
+                                <div class="img-holder"> <a href="#"><img src="{{ film.image }}" height="700px" width="640px" alt=""></a> <a
+                                        href="{{ film.image }}" class="btn-full-image popup"><span>FULL IMAGE</span></a>
                                 </div>
                                 <!-- meta -->
                                 <div class="meta">
-                                    <p class="date">APRIL 09, 2012 by <a href="#">JOHN DOE</a></p>
+                                    <p class="date">{{ film.datepub|date("m/d/Y") }} <a href="#">{{ film.realisateur }}</a></p>
                                     <div class="right">
-                                        <div class="rating-holder">
+                                       <!-- <div class="rating-holder">
                                             <p>RATING</p>
                                             <div class="rating"> <span style="width: 100%;"></span> </div>
                                         </div>
                                         <a href="#" class="comments">59 comments</a>
-                                    </div>
-                                    <div class="cl">&nbsp;</div>
+                                    </div>-
+                                    <div class="cl">&nbsp;</div>-->
                                 </div>
+
                                 <!-- end of meta -->
                                 <!-- post-cnt -->
                                 <div class="post-cnt">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut commodo orci vitae
-                                        enim
-                                        volutpat dapibus. Aliquam pharetra, odio eu luctus semper, dolor libero
-                                        volutpat
-                                        mi, sit amet convallis tortor justo eu nisl. Cras quis felis quis felis tempor
-                                        volutpat id at dui. Donec vel turpis id odio tempus mollis quis vel justo.
-                                        Etiam
-                                        tortor nisi, pulvinar a mattis nec, luctus sit amet odio. Morbi id commodo
-                                        ligula.
+                                    <p>
+                                        <br>
+                                        {{ film.description }}
                                     </p>
-                                    <a href="#" class="more">CONTINUE READING</a>
+                                    <a href="{{ path('film_show', {'id': film.id}) }}"><h3>Consultez Details</h3></a>
                                 </div>
                                 <!-- end of post-cnt -->
                             </div>
                             <!-- post-inner -->
                         </div>
+                        {% endfor %}
                         <!-- end of post -->
                         
                         <div class="pagination">
